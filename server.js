@@ -4,7 +4,7 @@ const nanoid = require('nanoid');
 const express = require('express');
 const path = require('path');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 let id = nanoid.nanoid();
 console.log(id);
@@ -54,6 +54,14 @@ app.post('/api/notes', (req, res) => {
     writeNotesToFile(JSON.stringify(notesData))
     console.log(notesData)
     
+})
+
+app.delete('/api/notes/:id', (req, res) => {
+    console.log(req.params.id)
+    notesData = notesData.filter( note => note.id != req.params.id)
+    console.log(notesData)
+    writeNotesToFile(JSON.stringify(notesData))
+    res.sendFile(path.join(__dirname, 'db/db.json'))  
 })
 
 
