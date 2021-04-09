@@ -47,12 +47,12 @@ app.get('/api/notes', (req, res) => {
 })
 
 app.post('/api/notes', (req, res) => {
-    console.log(req.body)
+    //console.log(req.body)
     req.body.id = nanoid.nanoid();
     notesData.push(req.body)
     res.json(req.body)
     writeNotesToFile(JSON.stringify(notesData))
-    console.log(notesData)
+    //console.log(notesData)
     
 })
 
